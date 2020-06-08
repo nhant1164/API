@@ -1,13 +1,25 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const  User = require('./model')
 // Variable to be sent to Frontend with Database status
 let databaseConnection = "Waiting for Database response...";
+var chris = new User({
+    name: 'Chris',
+    username: 'sevilayha',
+    password: 'password' 
+  });
 router.get("/", function(req, res, next) {
-    res.send(databaseConnection);
+    res.send(chris.name);
 });
 // Connecting to MongoDB
-mongoose.connect("mongodb://mongodb:27017/test");
+var mongoDB = 'mongodb://mongoDB:27017/my_database';
+
+// mongoose.connect(mongoDB
+mongoose.connect(mongoDB, { useNewUrlParser: true });
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 // If there is a connection error send an error message
 mongoose.connection.on("error", error => {
     console.log("Database connection error:", error);
