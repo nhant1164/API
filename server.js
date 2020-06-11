@@ -19,7 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const db = require("./models/");
 
 const Role = db.role;
-
+const Class = db.class;
+const GLV = db.glv;
 db.mongoose
   .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
     useNewUrlParser: true,
@@ -71,6 +72,62 @@ function initial() {
       });
     }
   });
+  GLV.estimatedDocumentCount((err, count) => {
+    if (!err && count === 0) {
+      new GLV({
+        name: "Hieu Truong",
+        age: 22,
+        phoneNumber: 786441103,
+        address: 'String',
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'Hieu Truong' to GLV collection");
+      });
+
+      new GLV({
+        name: "Nguyen Tran Thien An",
+        age: 22,
+        phoneNumber: 786441103,
+        address: 'String',
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'Nguyen Tran Thien An' to GLV collection");
+      });
+
+      new GLV({
+        name: "Nguyen Xuan Linh",
+        age: 22,
+        phoneNumber: 786441103,
+        address: 'String',
+      }).save(err => {
+        if (err) {
+          console.log("error", err);
+        }
+
+        console.log("added 'Nguyen Xuan Linh' to GLV collection");
+      });
+    }
+  });
+  // Class.estimatedDocumentCount((err, count) => {
+  //   if (!err && count === 0) {
+  //     new Class({
+  //       name: "1A",
+  //     }).save(err => {
+  //       if (err) {
+  //         console.log("error", err);
+  //       }
+        
+  //       console.log("added 'user' to roles collection");
+  //     });
+
+  //   }
+  // });
 }
 // routes
 

@@ -4,13 +4,16 @@ const Class = mongoose.model(
   "Class",
   new mongoose.Schema({
     name: String,
-    glv: String,
+    glv: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "GLV"
+    }],
     students: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Student"
-        }
-      ],
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Student"
+      }
+    ],
   })
 );
 
